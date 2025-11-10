@@ -1,206 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Free CCTV Storage Calculator for Singapore. Find out how many days your 4K cameras record on 2TB, 4TB, or any drive." />
-  <meta name="robots" content="index, follow" />
-  <title>How Many Days on 2TB? | CCTV Storage Calculator Singapore</title>
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="How Many Days on 2TB? | CCTV Storage Calculator" />
-  <meta property="og:description" content="Free tool for Singapore: 4K, H.265, Hikvision, Dahua. No signup." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourusername.github.io/cctv-calculator" />
-
-  <style>
-    :root {
-      --primary: #e74c3c;
-      --success: #27ae60;
-      --bg: #f8f9fa;
-      --card: #ffffff;
-      --text: #2c3e50;
-    }
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      padding: 20px;
-    }
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      background: var(--card);
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-    .hero {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      text-align: center;
-      padding: 50px 20px;
-    }
-    .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 12px;
-    }
-    .hero p {
-      font-size: 1.3rem;
-      opacity: 0.9;
-    }
-    .calc-box {
-      padding: 40px 30px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-bottom: 20px;
-    }
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 6px;
-      color: #34495e;
-    }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      transition: border 0.3s;
-    }
-    input:focus, select:focus {
-      border-color: var(--primary);
-      outline: none;
-    }
-    button {
-      width: 100%;
-      background: var(--primary);
-      color: white;
-      padding: 16px;
-      font-size: 18px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #c0392b;
-    }
-    .result {
-      margin: 30px 0;
-      padding: 25px;
-      background: #fef9e7;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #d35400;
-      display: none;
-    }
-    .trust {
-      text-align: center;
-      color: #7f8c8d;
-      font-size: 0.95rem;
-      margin-top: 20px;
-    }
-    @media (max-width: 600px) {
-      .grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiasu CCTV Storage Estimator for Singapore - Never Miss a Moment</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font import and application */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc; /* Light background for professionalism */
+        }
+    </style>
 </head>
-<body>
+<body class="p-4 sm:p-8">
 
-  <div class="container">
-    <!-- HERO -->
-    <div class="hero">
-      <h1>How Many Days on 2TB?</h1>
-      <p>Free CCTV Storage Calculator – Singapore Edition</p>
-      <p style="font-size:1rem;margin-top:10px;">4K • H.265 • Hikvision • Dahua • Reolink</p>
+<div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-xl p-6 md:p-10 border-t-8 border-indigo-600">
+    <!-- SEO & Branding Header -->
+    <header class="mb-8 text-center">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">
+            🇸🇬 The Kiasu CCTV Storage Estimator 🛡️
+        </h1>
+        <p class="text-xl text-indigo-600 font-semibold mb-4">
+            *Never* Run Out of Evidence. Calculate Your NVR/DVR Storage Needs Accurately.
+        </p>
+        <p class="text-gray-500 max-w-2xl mx-auto">
+            Get the right capacity for your HDB, Condo, or Business security setup. We make sure your peace of mind is protected for the long haul.
+        </p>
+    </header>
+
+    <!-- Calculator Grid -->
+    <div id="calculator-inputs" class="grid md:grid-cols-2 gap-8 mb-8">
+
+        <!-- Input 1: Number of Cameras -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+            <label for="camera-count" class="block text-lg font-medium text-gray-700 mb-2">
+                1. How many cameras are you installing?
+            </label>
+            <input type="number" id="camera-count" value="4" min="1" max="32" oninput="calculateStorage()"
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-xl font-bold">
+            <p class="mt-2 text-sm text-gray-500">
+                Commonly 4-8 for HDB/Condo, more for landed or business premises.
+            </p>
+        </div>
+
+        <!-- Input 2: Recording Days Required -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+            <label for="recording-days" class="block text-lg font-medium text-gray-700 mb-2">
+                2. How many days of recording must you keep?
+            </label>
+            <input type="number" id="recording-days" value="14" min="7" max="180" oninput="calculateStorage()"
+                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-xl font-bold">
+            <p class="mt-2 text-sm text-gray-500">
+                Most Singaporeans opt for at least 7 to 14 days of history.
+            </p>
+        </div>
+
+        <!-- Input 3: Video Quality (Resolution) -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+            <label for="resolution" class="block text-lg font-medium text-gray-700 mb-2">
+                3. What video quality (Resolution) do you need?
+            </label>
+            <select id="resolution" onchange="calculateStorage()"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-xl font-bold appearance-none">
+                <option value="2">1080p (2MP) - Good Clarity</option>
+                <option value="4" selected>4MP (2K) - Recommended for Evidence</option>
+                <option value="8">8MP (4K) - Ultra-Sharp Detail</option>
+            </select>
+        </div>
+
+        <!-- Input 4: Compression Standard -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+            <label class="block text-lg font-medium text-gray-700 mb-3">
+                4. What compression technology will you use?
+            </label>
+            <div class="flex space-x-4">
+                <label class="flex items-center space-x-2 cursor-pointer bg-white p-3 rounded-lg border border-gray-300 hover:border-indigo-500 transition duration-150">
+                    <input type="radio" name="compression" value="H.264" onchange="calculateStorage()" class="text-indigo-600 focus:ring-indigo-500" checked>
+                    <span class="text-gray-900 font-semibold">H.264</span>
+                    <span class="text-sm text-gray-500">(Standard)</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer bg-white p-3 rounded-lg border border-gray-300 hover:border-indigo-500 transition duration-150">
+                    <input type="radio" name="compression" value="H.265" onchange="calculateStorage()" class="text-indigo-600 focus:ring-indigo-500">
+                    <span class="text-gray-900 font-semibold">H.265 (HEVC)</span>
+                    <span class="text-sm text-green-600">(40% Less Storage!)</span>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Input 5: Frames Per Second (FPS) -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner md:col-span-2">
+            <label for="fps" class="block text-lg font-medium text-gray-700 mb-2">
+                5. Recording Smoothness (Frames Per Second - FPS)
+            </label>
+            <select id="fps" onchange="calculateStorage()"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-xl font-bold appearance-none">
+                <option value="15" selected>15 FPS - Standard Smoothness (Recommended for Home)</option>
+                <option value="8">8 FPS - Max Storage Saving</option>
+                <option value="25">25 FPS - Real-Time Motion (Required for Commercial/Landed)</option>
+            </select>
+        </div>
+
     </div>
 
-    <!-- CALCULATOR -->
-    <div class="calc-box">
-      <div class="grid">
-        <div>
-          <label>Number of Cameras</label>
-          <input id="cams" type="number" value="4" min="1" />
-        </div>
-        <div>
-          <label>Resolution</label>
-          <select id="res">
-            <option value="2">1080p (2MP)</option>
-            <option value="4">2K (4MP)</option>
-            <option value="8" selected>4K (8MP)</option>
-          </select>
-        </div>
-        <div>
-          <label>Frame Rate (fps)</label>
-          <input id="fps" type="number" value="15" min="1" max="30" />
-        </div>
-        <div>
-          <label>Recording Days</label>
-          <input id="days" type="number" value="30" min="1" max="365" />
-        </div>
-      </div>
+    <!-- Results Area -->
+    <div id="results-card" class="mt-8 p-6 bg-indigo-50 border-2 border-indigo-600 rounded-xl text-center">
+        <h2 class="text-2xl font-bold text-indigo-900 mb-4">
+            Required Storage Capacity:
+        </h2>
+        <p class="text-6xl font-extrabold text-indigo-600 mb-2" id="required-tb">0.00 TB</p>
+        <p class="text-lg font-medium text-gray-700 mb-4">
+            That's approximately <span id="required-gb" class="font-bold text-indigo-700">0 GB</span>.
+        </p>
 
-      <label>Compression</label>
-      <select id="comp" style="width:100%;padding:12px;font-size:16px;border:1px solid #ddd;border-radius:8px;margin-bottom:15px;">
-        <option value="0.5">H.265 (50% smaller – Recommended)</option>
-        <option value="1">H.264</option>
-      </select>
-
-      <button onclick="calculate()">Calculate Storage Now</button>
-
-      <!-- RESULT -->
-      <div id="result" class="result">
-        You need <span id="gb">0</span> GB <br>
-        (≈ <span id="tb">0</span> TB) of storage
-      </div>
-
-      <div class="trust">
-        Used by <strong>1,200+ Singapore homeowners</strong> | Updated for 2025 standards
-      </div>
+        <div id="recommendation-text" class="text-sm text-gray-600 mt-4">
+            <!-- Recommendation text goes here -->
+        </div>
     </div>
-  </div>
 
-  <script>
-    function calculate() {
-      const cams = parseFloat(document.getElementById('cams').value) || 4;
-      const mp = parseFloat(document.getElementById('res').value);
-      const fps = parseFloat(document.getElementById('fps').value) || 15;
-      const days = parseFloat(document.getElementById('days').value) || 30;
-      const comp = parseFloat(document.getElementById('comp').value);
+    <!-- SEO Footer Content -->
+    <footer class="mt-10 pt-6 border-t border-gray-200 text-center">
+        <p class="text-sm text-gray-500">
+            *This calculator provides an estimated minimum required capacity. It uses standard bitrate assumptions for security cameras (HDB, Condo, Landed House, Business CCTV in Singapore). Always round up to the next commercially available hard drive size (e.g., from 4.1 TB to 6 TB) for best results.
+        </p>
+    </footer>
 
-      // Bitrate (Mbps) = MP × fps × 0.15 × compression factor
-      const bitrate = mp * fps * 0.15 * comp;
-      const totalGB = (bitrate * cams * 86400 * days) / (8 * 1024 * 1024 * 1024) * 1.2; // +20% overhead
-      const tb = (totalGB / 1024).toFixed(1);
+</div>
 
-      document.getElementById('gb').textContent = Math.round(totalGB);
-      document.getElementById('tb').textContent = tb;
-      document.getElementById('result').style.display = 'block';
+<script>
+    // Constants for Bitrate Estimation (in Mbps)
+    // These are conservative estimates for continuous, high-quality recording.
+    // 1 Mbps/day/camera ≈ 10.54 GB/day/camera
+    const BITRATES = {
+        // H.264 (Standard) Estimates in Mbps
+        'H.264': {
+            '2': 4.0, // 1080p (2MP)
+            '4': 6.0, // 4MP (2K)
+            '8': 10.0 // 8MP (4K)
+        },
+        // H.265 (HEVC) Estimates in Mbps (approx. 40% reduction from H.264)
+        'H.265': {
+            '2': 2.5, // 1080p (2MP)
+            '4': 3.6, // 4MP (2K)
+            '8': 6.0  // 8MP (4K)
+        }
+    };
+    
+    // Constant for converting 1 Mbps of data recorded over 24 hours to Gigabytes
+    // Calculation: (1,000,000 bits/s * 3600 s/hr * 24 hr/day) / (8 bits/byte * 1024^3 bytes/GB)
+    const GB_PER_DAY_PER_MBPS = 10.546875;
+
+    function calculateStorage() {
+        // 1. Get User Inputs
+        const cameraCount = parseInt(document.getElementById('camera-count').value) || 0;
+        const recordingDays = parseInt(document.getElementById('recording-days').value) || 0;
+        const resolution = document.getElementById('resolution').value; // '2', '4', or '8'
+        const compressionElement = document.querySelector('input[name="compression"]:checked');
+        const compression = compressionElement ? compressionElement.value : 'H.264';
+        const fps = parseInt(document.getElementById('fps').value) || 15;
+
+        // Ensure inputs are valid
+        if (cameraCount <= 0 || recordingDays <= 0) {
+            document.getElementById('required-tb').textContent = '0.00 TB';
+            document.getElementById('required-gb').textContent = '0 GB';
+            document.getElementById('recommendation-text').innerHTML = 'Please enter a valid number of cameras and days to calculate.';
+            return;
+        }
+
+        // 2. Determine Base Bitrate (Mbps)
+        const baseBitrate = BITRATES[compression][resolution];
+
+        // 3. Apply FPS Multiplier
+        // Standard full-motion video for surveillance is 25 FPS (or 30 in some regions).
+        // We use 25 FPS as the 1.0 baseline for the baseBitrate values.
+        const fpsMultiplier = fps / 25;
+        
+        // 4. Calculate Total Required Gigabytes
+        // Total GB = (Camera Count * Base Bitrate (Mbps) * Days * GB_PER_DAY_PER_MBPS) * FPS Multiplier
+        let totalGB = (cameraCount * baseBitrate * recordingDays * GB_PER_DAY_PER_MBPS) * fpsMultiplier;
+
+        // 5. Convert to Terabytes and Format
+        const totalTB = totalGB / 1024;
+
+        // Update the results display
+        document.getElementById('required-tb').textContent = totalTB.toFixed(2) + ' TB';
+        document.getElementById('required-gb').textContent = Math.ceil(totalGB).toLocaleString('en-US') + ' GB';
+
+        // Update Recommendation Text
+        const recommendationDiv = document.getElementById('recommendation-text');
+        
+        // Find the next standard HDD size to recommend
+        let recommendedTB = 0;
+        const standardSizes = [1, 2, 4, 6, 8, 10, 12, 16];
+        for (const size of standardSizes) {
+            if (size >= totalTB) {
+                recommendedTB = size;
+                break;
+            }
+        }
+        
+        if (totalTB > 0) {
+            if (recommendedTB === 0) {
+                // For very large systems, recommend a high-end size
+                recommendedTB = 16;
+            }
+
+            recommendationDiv.innerHTML = `
+                <p class="font-bold text-gray-900">
+                    💡 Our Pro Tip: For safety, always choose the next available hard drive size.
+                    We recommend a minimum NVR/DVR capacity of <span class="text-indigo-600 font-extrabold text-xl">${recommendedTB} TB</span>.
+                </p>
+            `;
+        } else {
+            recommendationDiv.innerHTML = 'Please adjust the inputs above.';
+        }
     }
-  </script>
 
-  <!-- Optional: Google Analytics -->
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXX');
-  </script>
-  -->
+    // Run the calculation once on load with default values
+    document.addEventListener('DOMContentLoaded', calculateStorage);
+</script>
 
 </body>
 </html>
